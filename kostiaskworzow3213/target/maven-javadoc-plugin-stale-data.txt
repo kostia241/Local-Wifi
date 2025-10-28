@@ -1,0 +1,47 @@
+@options
+@packages
+@argfile
+-encoding
+'UTF-8'
+-protected
+-source
+'1.8'
+-sourcepath
+'D:/Java/23-»—-4/kostiaskworzow3213/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'D:/Java/23-»—-4/kostiaskworzow3213/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'kostiaskworzow3213 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/javase/8/docs/api' 'D:/Java/23-»—-4/kostiaskworzow3213/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'kostiaskworzow3213 1.0-SNAPSHOT API'
+com.mycompany.kostiaskworzow3213
+com.mycompany.kostiaskworzow3213.ui
+'D:/Java/23-»—-4/kostiaskworzow3213/src/main/java/com/mycompany/kostiaskworzow3213/App.java'
+'D:/Java/23-»—-4/kostiaskworzow3213/src/main/java/com/mycompany/kostiaskworzow3213/ui/MainPanel.java'
+'D:/Java/23-»—-4/kostiaskworzow3213/src/main/java/com/mycompany/kostiaskworzow3213/ui/PC.java'
+D:\Java\23-»—-4\kostiaskworzow3213\src\main\java = 1761547931466
+D:\Java\23-»—-4\kostiaskworzow3213\target\site\apidocs\allclasses-frame.html = 1761561032546
+D:\Java\23-»—-4\kostiaskworzow3213\target\site\apidocs\allclasses-noframe.html = 1761561032549
+D:\Java\23-»—-4\kostiaskworzow3213\target\site\apidocs\constant-values.html = 1761561032271
+D:\Java\23-»—-4\kostiaskworzow3213\target\site\apidocs\deprecated-list.html = 1761561032513
+D:\Java\23-»—-4\kostiaskworzow3213\target\site\apidocs\help-doc.html = 1761561032565
+D:\Java\23-»—-4\kostiaskworzow3213\target\site\apidocs\index-all.html = 1761561032492
+D:\Java\23-»—-4\kostiaskworzow3213\target\site\apidocs\index.html = 1761561032555
+D:\Java\23-»—-4\kostiaskworzow3213\target\site\apidocs\overview-frame.html = 1761561032212
+D:\Java\23-»—-4\kostiaskworzow3213\target\site\apidocs\overview-summary.html = 1761561032559
+D:\Java\23-»—-4\kostiaskworzow3213\target\site\apidocs\overview-tree.html = 1761561032359
+D:\Java\23-»—-4\kostiaskworzow3213\target\site\apidocs\package-list = 1761561032207
+D:\Java\23-»—-4\kostiaskworzow3213\target\site\apidocs\script.js = 1761561032605
+D:\Java\23-»—-4\kostiaskworzow3213\target\site\apidocs\serialized-form.html = 1761561032311
+D:\Java\23-»—-4\kostiaskworzow3213\target\site\apidocs\stylesheet.css = 1761561032600
