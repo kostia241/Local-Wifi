@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.mycompany.kostiaskworzow3213.ui;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.io.IOException;
@@ -19,17 +20,19 @@ import javax.swing.JPanel;
  * @author student
  */
 public class MainPanel extends javax.swing.JPanel {
-private PC pc;
+
+    private PC pc;
     private JPanel[] panels;
-DefaultListModel dlm;
+    DefaultListModel dlm;
 //private JPanel spinnerPanel;
 //private JSpinner spinner1, spinner2, spinner3;
+
     /**
      * Creates new form Hosts
      */
     public MainPanel() {
         initComponents();
-        dlm=new DefaultListModel(); 
+        dlm = new DefaultListModel();
         dlm.clear();
         jList1.setModel(dlm);
         dlm.add(0, "Comp6");
@@ -62,6 +65,7 @@ DefaultListModel dlm;
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
@@ -99,6 +103,13 @@ DefaultListModel dlm;
 
         jLabel4.setText("До");
 
+        jButton3.setText("ProgressBar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -111,15 +122,19 @@ DefaultListModel dlm;
                 .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jTextField1)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jLabel2)
-            .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,6 +160,8 @@ DefaultListModel dlm;
                 .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -157,8 +174,7 @@ DefaultListModel dlm;
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -168,21 +184,50 @@ DefaultListModel dlm;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    int countcomp = dlm.getSize();
+        int countcomp = dlm.getSize();
         createComp(countcomp);
-    
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-int from = Integer.valueOf(jSpinner1.getValue().toString());
-int to = Integer.valueOf(jSpinner2.getValue().toString());
-        checkHost("192.168.4",from,to);
-        
+        int from = Integer.valueOf(jSpinner1.getValue().toString());
+        int to = Integer.valueOf(jSpinner2.getValue().toString());
+        checkHost("192.168.4", from, to);
+        for (int i = from; i <= to; i++) {
+            final int j = i;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        byte[] ip = new byte[4];
+                        ip[0] = (byte) 192;
+                        ip[1] = (byte) 168;
+                        ip[2] = (byte) 4;
+                        ip[3] = (byte) j;
+                        InetAddress address = InetAddress.getByAddress(ip);
+                        String output = address.toString().substring(1);
+                        if (address.isReachable(5000)) {
+                            System.out.println(output + "is on the Network");
+                        } else {
+                            System.out.println("Not Reachable: " + output);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+ //To change body of generated methods, choose Tools | Templates.
+                }
+            }).start();
+        }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-     private void createComp(int quantityComps) {
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+    private void createComp(int quantityComps) {
         panels = new JPanel[quantityComps];
         jPanel2.removeAll();
         for (int i = 0; i < quantityComps; i++) {
@@ -191,9 +236,9 @@ int to = Integer.valueOf(jSpinner2.getValue().toString());
             dot.add(pc);
             panels[i] = dot;
         }
-        
-        JPanel mainPanel=new JPanel();
-        mainPanel.setLayout(new GridLayout(3, 3, 5, 5)); 
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new GridLayout(3, 3, 5, 5));
 
         for (int q = 0; q < panels.length; q++) {
             mainPanel.add(panels[q]);
@@ -201,35 +246,65 @@ int to = Integer.valueOf(jSpinner2.getValue().toString());
         jPanel2.setLayout(new BorderLayout());
         jPanel2.add(mainPanel, BorderLayout.CENTER);
         jPanel2.revalidate();
-        
+
     }
-private void checkHost(String subnet, int from, int to){
-       dlm.clear();
-       int timeout = 100;
-       int j=0;
+
+    private void checkHost(String subnet, int from, int to) {
+        dlm.clear();
+        int timeout = 100;
+        int j = 0;
         for (int i = from; i < to; i++) {
-           try {
-               String host = subnet+"."+i;
-               if (InetAddress.getByName(host).isReachable(timeout)){
-                   dlm.add(j, host);
-                   j++;
-               }else{
-                   System.out.println("host unreacheble");
-               }
-           } catch (UnknownHostException ex) {
-               Logger.getLogger(MainPanel.class.getName()).log(Level.SEVERE, null, ex);
-           } catch (IOException ex) {
-               Logger.getLogger(MainPanel.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           
+            try {
+                String host = subnet + "." + i;
+                if (InetAddress.getByName(host).isReachable(timeout)) {
+                    dlm.add(j, host);
+                    j++;
+                } else {
+                    System.out.println("host unreacheble");
+                }
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(MainPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(MainPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
     }
-private void Intervase(String subnet, int from, int to ) {
+
+    public static void getNetworkIPs() {
+        final byte[] ip;
+        try {
+            ip = InetAddress.getLocalHost().getAddress();
+        } catch (java.net.UnknownHostException e) {
+            return;
+        }
+        for (int i = 1; i <= 254; i++) {
+            final int j = i;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        ip[3] = (byte) j;
+                        InetAddress address = InetAddress.getByAddress(ip);
+                        String output = address.toString().substring(1);
+                        if (address.isReachable(5000)) {
+                            System.out.println(output + "is on the Network");
+                        } else {
+                            System.out.println("Not Reachable: " + output);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            }).start();
+        }
 //    spinner = new JSpinner[];
-}
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
